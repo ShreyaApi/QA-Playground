@@ -8,7 +8,7 @@ from utils.json_reader import read_json
 @pytest.fixture(scope="function")
 def page():
     with sync_playwright() as p:
-        browser = p.chromium.launch(headless=False, slow_mo=2000)
+        browser = p.chromium.launch(headless=True, slow_mo=2000)
 
         # context = browser.new_context(viewport=None)
 
