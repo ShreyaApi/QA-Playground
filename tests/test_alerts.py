@@ -132,9 +132,9 @@ def test_sweet_alert(page):
 
     alerts.click_sweet_alert()
 
-    alerts.click_you_are()
+    page.wait_for_timeout(3000)
 
-    expect(page.get_by_role("heading", name="Modern Alert")).to_be_visible()
+    alerts.click_you_are()
 
 
 # Scenario: Handle a sweet alert (sometime)

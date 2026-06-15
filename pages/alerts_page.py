@@ -16,6 +16,8 @@ class AlertsPage:
 
         self.sweet_alert_btn = page.get_by_test_id("btn-modal-alert")
 
+        self.sweet_alert_title = page.locator("#radix-_r_10s_")
+
         self.share_btn = page.get_by_role("button", name="Share")
 
         self.share_link = page.locator("input[readonly]")
@@ -41,10 +43,10 @@ class AlertsPage:
         self.sweet_alert_btn.click()
 
     def click_you_are(self):
-        self.page.get_by_role("button", name="You Are!").click()
+        self.page.get_by_test_id("btn-modal-confirm").click()
 
     def click_sometime(self):
-        self.page.get_by_role("button", name="Sometime").click()
+        self.page.get_by_test_id("btn-modal-cancel").click()
 
     def click_share(self):
         self.share_btn.click()
