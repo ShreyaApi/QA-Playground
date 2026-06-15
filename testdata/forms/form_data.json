@@ -1,0 +1,14 @@
+{
+    "valid_user": {
+        "first_name": "Kajal",
+        "last_name": "Patil",
+        "email": "Kajalp@gmail.com",
+        "phone": "9876565445",
+        "dob": "2000-01-01",
+        "country": "India",
+        "city": "Pune",
+        "about": "Learning Playwright Automation",
+        "password": "Kajal@123",
+        "confirm_password": "Kajal@123"
+    }
+}

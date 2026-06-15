@@ -1,0 +1,8 @@
+{
+    "admin_username": "admin",
+    "admin_password": "admin123",
+    "viewer_username": "viewer",
+    "viewer_password": "viewer123",
+    "invalid_username": "shreya",
+    "invalid_password": "shreya123"
+}
