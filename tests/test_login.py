@@ -18,7 +18,7 @@ def test_valid_login(page):
 
     page.wait_for_timeout(2000)
 
-    assert "dashboard" in page.url.lower()
+    assert "dashboard123" in page.url.lower()
 
 
 # TC2 : invalid Login

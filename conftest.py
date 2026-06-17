@@ -1,22 +1,53 @@
 import pytest
-from playwright.sync_api import sync_playwright
+import os
 
 from pages.login_page import LoginPage
 from utils.json_reader import read_json
 
 
 @pytest.fixture(scope="function")
-def page():
-    with sync_playwright() as p:
-        browser = p.chromium.launch(headless=True, slow_mo=2000)
+def page(browser, request):
 
-        # context = browser.new_context(viewport=None)
+    os.makedirs("screenshots", exist_ok=True)
+    os.makedirs("videos", exist_ok=True)
 
-        page = browser.new_page()
+    context = browser.new_context(no_viewport=True, record_video_dir="videos/")
 
-        yield page
+    page = context.new_page()
 
-        browser.close()
+    page.set_default_timeout(60000)
+
+    yield page
+
+    # Runs AFTER test execution
+    if request.node.rep_call.failed:
+
+        page.screenshot(path=f"screenshots/{request.node.name}.png", full_page=True)
+
+    video_path = page.video.path()
+
+    context.close()
+
+    if request.node.rep_call.passed:
+
+        if os.path.exists(video_path):
+            os.remove(video_path)
+
+        print("Passed video deleted")
+
+    else:
+
+        print(f"Failed video kept: {video_path}")
+
+
+@pytest.hookimpl(hookwrapper=True)
+def pytest_runtest_makereport(item, call):
+
+    outcome = yield
+
+    rep = outcome.get_result()
+
+    setattr(item, "rep_" + rep.when, rep)
 
 
 @pytest.fixture
