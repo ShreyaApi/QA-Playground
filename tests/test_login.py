@@ -1,24 +1,35 @@
 from pages.login_page import LoginPage
 from utils.json_reader import read_json
+from utils.logger import get_logger
 
 # TC1 : Successful login with valid credentials
 
 
 def test_valid_login(page):
 
+    logger = get_logger()
+
     data = read_json("testdata/bank/login_data.json")
 
     login = LoginPage(page)
 
+    logger.info("Opening Login Page")
+
     login.open()
+
+    logger.info("Entering Credentials")
 
     login.login(data["admin_username"], data["admin_password"])
 
     page.wait_for_load_state()
 
+    logger.info("Validating Dashboard")
+
     page.wait_for_timeout(2000)
 
-    assert "dashboard123" in page.url.lower()
+    assert "dashboard" in page.url.lower()
+
+    logger.info("Test Passed")
 
 
 # TC2 : invalid Login

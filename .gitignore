@@ -1,0 +1,7 @@
+videos/
+screenshots/
+reports/
+logs/
+__pycache__/
+.pytest_cache/
+venv/
